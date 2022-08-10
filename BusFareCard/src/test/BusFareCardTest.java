@@ -1,15 +1,15 @@
 package test;
 
-import exceptions.IllegalAgeException;
-import exceptions.NoBalanceException;
-
-import model.BusFareCard;
-import org.junit.Before;
-import org.junit.Test;
-
 import static model.BusFareCard.ADULT_FARE;
 import static model.BusFareCard.CONCESSION_FARE;
 import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import exceptions.IllegalAgeException;
+import exceptions.NoBalanceException;
+import model.BusFareCard;
 
 public class BusFareCardTest {
 
