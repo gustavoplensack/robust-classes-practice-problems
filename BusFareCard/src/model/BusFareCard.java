@@ -32,13 +32,28 @@ public class BusFareCard {
     public double getBalance() { return balance; }
     public boolean isFareLoaded() { return fareLoaded; }
 
+    public boolean isAdult(){
+        return ownerAge > AGE_CUTOFF;
+    }
+
     // MODIFIES: this
     // EFFECTS: if the age of this card < AGE_CUTOFF throws IllegalAgeException
     //          if balance < 0 throws NoBalanceException 
     //          otherwise subtract cost of the adult fare from the balance
     //          and set the fareLoaded field to true
     public void purchaseAdultFare() throws IllegalAgeException, NoBalanceException {
-        //TODO: complete the implementation of this method
+        if (!isAdult()){
+            throw new IllegalAgeException("User is not an adult and is elligible for concession fare!");
+        }
+
+        if(balance<ADULT_FARE){
+            throw new NoBalanceException("Not enough money to pay the fare");
+        }
+
+        balance -= ADULT_FARE;
+
+        fareLoaded = true;
+
     }
 
     // MODIFIES: this
@@ -47,21 +62,41 @@ public class BusFareCard {
     //          otherwise subtract cost of a concession fare from the balance
     //          and set the fareLoaded field to true
     public void purchaseConcessionTicket() throws IllegalAgeException, NoBalanceException {
-        //TODO: complete the implementation of this method
+        if (isAdult()){
+            throw new IllegalAgeException("User is an adult and is not elligible for concession fare!");
+        }
+
+        if(balance<CONCESSION_FARE){
+            throw new NoBalanceException("Not enough money to pay the fare");
+        }
+
+        balance -= CONCESSION_FARE;
+
+        fareLoaded = true;
+
     }
 
     // MODIFIES: this
     // EFFECTS: if amount < 0, throws IllegalAmountException
     //          otherwise: loads the specified amount onto the card's balance field
     public void reloadBalance(double amount) throws IllegalAmountException {
-        //TODO: complete the implementation of this method
+        if(amount<=0){
+            throw new IllegalAmountException("You must recharge at least $0.01");
+        }
+
+        balance += amount;
+
     }
 
     // MODIFIES: this
     // EFFECTS: if the fare is not loaded, throws MissingFareException
     //          otherwise, sets fareLoaded to false
     public void boardBus() throws MissingFareException {
-        //TODO: complete the implementation of this method
+        if (!fareLoaded){
+            throw new MissingFareException();
+        }
+
+        fareLoaded = false;
     }
 
 

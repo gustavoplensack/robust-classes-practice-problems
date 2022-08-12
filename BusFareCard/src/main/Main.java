@@ -1,7 +1,10 @@
 package main;
 
-import model.BusFareCard;
 import java.util.Scanner;
+
+import exceptions.IllegalAgeException;
+import exceptions.NoBalanceException;
+import model.BusFareCard;
 
 public class Main {
 
@@ -63,9 +66,9 @@ public class Main {
 
     private static void purchaseAdultFare(BusFareCard c) {
         try {
-            //TODO: what kind of exception are we expecting to catch here? Replace this todo with the method call
+            card.purchaseAdultFare();
             gotoinfoPage();
-        } catch (Exception e) {
+        } catch (IllegalAgeException | NoBalanceException e) {
             System.out.println(e.getMessage());
             gotoinfoPage();
         }
@@ -73,9 +76,9 @@ public class Main {
 
     private static void purcahseConcessionFare(BusFareCard c) {
         try {
-            //TODO: what kind of exception are we expecting to catch here? Replace this todo with the method call
+            card.purchaseConcessionTicket();
             gotoinfoPage();
-        } catch (Exception e) {
+        } catch (IllegalAgeException | NoBalanceException e) {
             System.out.println(e.getMessage());
             gotoinfoPage();
 
